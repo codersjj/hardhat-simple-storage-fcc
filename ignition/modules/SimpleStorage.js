@@ -20,9 +20,18 @@ async function main() {
     hre.network.config.chainId === 11155111 &&
     process.env.ETHERSCAN_API_KEY
   ) {
+    console.log("Waiting for block confirmations...")
     await simpleStorageContract.deploymentTransaction().wait(6)
     await verify(address, [])
   }
+
+  const currentValue = await simpleStorageContract.retrieve()
+  console.log(`Current value: ${currentValue}`)
+  // update the value
+  const txResponse = await simpleStorageContract.store(7)
+  await txResponse.wait(1)
+  const updatedValue = await simpleStorageContract.retrieve()
+  console.log(`Updated value: ${updatedValue}`)
 }
 
 async function verify(contractAddress, args) {
