@@ -19,6 +19,11 @@ module.exports = {
       accounts: [PRIVATE_KEY],
       chainId: 11155111,
     },
+    localhost: {
+      url: "http://127.0.0.1:8545/",
+      // accounts: Thanks to hardhat, we don't need to specify accounts
+      chainId: 31337,
+    },
   },
   etherscan: {
     apiKey: ETHERSCAN_API_KEY,
