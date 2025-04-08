@@ -34,7 +34,8 @@ async function main() {
   console.log(`Updated value: ${updatedValue}`)
 }
 
-async function verify(contractAddress, args) {
+// async function verify(contractAddress, args) {
+const verify = async (contractAddress, args) => {
   console.log("Verifying contract...")
   try {
     // see: https://github.com/NomicFoundation/hardhat/blob/main/packages/hardhat-verify/src/internal/task-names.ts#L4
