@@ -2,9 +2,12 @@ require("@nomicfoundation/hardhat-toolbox")
 require("dotenv").config()
 require("./tasks/block-number")
 
-const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL
-const PRIVATE_KEY = process.env.PRIVATE_KEY
-const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
+const SEPOLIA_RPC_URL =
+  process.env.SEPOLIA_RPC_URL || "https://eth-sepolia.g.alchemy.com/v2/demo"
+const PRIVATE_KEY = process.env.PRIVATE_KEY || "0xkey"
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "key"
+const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY || "key"
+const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || "key"
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -33,4 +36,19 @@ module.exports = {
   //   // Doesn't need an API key
   //   enabled: true,
   // },
+  gasReporter: {
+    enabled: true,
+    outputFile: "gas-report.txt",
+    noColors: true,
+    currency: "USD",
+    coinmarketcap: COINMARKETCAP_API_KEY,
+    // gasPrice: 21,
+
+    L1Etherscan: ETHERSCAN_API_KEY,
+    // token: "ETH",
+
+    // L1: "polygon",
+    // L1Etherscan: POLYGONSCAN_API_KEY,
+    // token: "POL",
+  },
 }
