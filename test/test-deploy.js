@@ -31,4 +31,20 @@ describe("SimpleStorage", () => {
     const currentValue = await simpleStorageContract.retrieve()
     assert.equal(currentValue.toString(), expectedValue)
   })
+
+  it("Should add person and retrieve", async () => {
+    const expectedName = "Alex"
+    const expectedFavoriteNumber = "100"
+    const transactionResponse = await simpleStorageContract.addPerson(
+      expectedName,
+      expectedFavoriteNumber
+    )
+    await transactionResponse.wait(1)
+
+    const person = await simpleStorageContract.people(0)
+    assert.equal(person.name, expectedName)
+    assert.equal(person.favoriteNumber, expectedFavoriteNumber)
+    const nameToFavoriteNumber = await simpleStorageContract.nameToFavoriteNumber(expectedName)
+    assert.equal(nameToFavoriteNumber.toString(), expectedFavoriteNumber)
+  })
 })
